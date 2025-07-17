@@ -1,0 +1,21 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block 'body' %}
+<div class="container">
+    <h2>Login</h2>
+    <form action="" method="post">
+        {% csrf_token %}
+        <img src="{% static 'images/logo.png' %}" alt="Logo" class="mb-4" height="72" width="72">  
+        {{ login_form.as_p }}
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+</div>
+{% endblock %}
+
+{% block footer %}
+<footer class="mt-auto text-white-50">
+    <p>Copyright © {% now 'Y' %} <a href="" class="text-white">AutoMax</a> by <a href="https://preneure.com"
+            class="text-white">Preneure.com</a></p>
+</footer>
+{% endblock %}

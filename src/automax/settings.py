@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'localflavor',
+    'crispy_forms',
+    'crispy_bootstrap4',
     'main',
     'users'
 ]
@@ -125,6 +127,23 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Media files settings
-MEDIA_URL = '/media/'
+MEDIA_URL = '/media/'   
 MEDIA_ROOT = BASE_DIR / 'media' # Directory to store uploaded media files       
 
+# Crispy Forms settings
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
+CRISPY_TEMPLATE_PACK = "bootstrap4"
+
+# login settings
+LOGIN_URL = '/login/'  # URL to redirect to for login
+LOGIN_REDIRECT_URL = '/home/'  # URL to redirect to after login
+
+# messages settings
+from django.contrib.messages import constants as messages   
+MESSAGE_TAGS = {
+    messages.DEBUG: 'alert-secondary',
+    messages.INFO: 'alert-info',
+    messages.SUCCESS: 'alert-success',
+    messages.WARNING: 'alert-warning',
+    messages.ERROR: 'alert-danger',
+}

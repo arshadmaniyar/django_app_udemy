@@ -1,0 +1,9 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block 'title' %}
+    <title>AutoMax . Home Page!</title>
+    {% endblock %}
+{% block 'body' %}
+    <h1>Welcome {{ request.user.username }} to the Home Page</h1>
+    <p>Hello, {{ request.user.username }}!</p>
+{% endblock %}
