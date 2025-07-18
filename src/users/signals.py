@@ -14,3 +14,11 @@ def create_profile_location(sender, instance, created, **kwargs):
        Profile_location = location.objects.create()
        instance.location = Profile_location
        instance.save()
+
+@receiver(post_save, sender=Profile)
+def delete_user_location(sender, instance, **kwargs):
+    """
+    Deletes the user location when the user is deleted.
+    """
+    if instance.location:
+        instance.location.delete()

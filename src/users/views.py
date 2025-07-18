@@ -46,9 +46,10 @@ class RegisterView(View):
         return render(request, "views/register.html", {"registration_form": form})
 
     def post(self, request):
-        register_form = UserCreationForm(request=request,data = request.POST)
+        register_form = UserCreationForm(data=request.POST)
         if register_form.is_valid():
             user = register_form.save()
+            user.refresh_from_db()  # Ensure the user instance is updated
             messages.success(request, "Registration successful!")
             return redirect('login')  # Redirect to login after successful registration
         else:
