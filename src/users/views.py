@@ -5,6 +5,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate
 from main.views import home_view
 from django.contrib.auth.forms import UserCreationForm
+from django.views import View
 
 def register_view(request):
     form = UserCreationForm()
@@ -38,3 +39,18 @@ def register_view(request):
     form = UserCreationForm()
     #return HttpResponse("Register View")  # Placeholder for the register view
     return render(request, "views/register.html", {"registration_form": form})
+
+class RegisterView(View):
+    def get(self, request):
+        form = UserCreationForm()
+        return render(request, "views/register.html", {"registration_form": form})
+
+    def post(self, request):
+        register_form = UserCreationForm(request=request,data = request.POST)
+        if register_form.is_valid():
+            user = register_form.save()
+            messages.success(request, "Registration successful!")
+            return redirect('login')  # Redirect to login after successful registration
+        else:
+            messages.error(request, "Registration failed. Please correct the errors below.")
+            return render(request, "views/register.html", {"registration_form": register_form})    
